@@ -34,11 +34,12 @@ class Game:
 
     def show_rules(self):
         print("\nGame Rules:")
-        print("- Rock crushes Scissors and crushes Lizard")
-        print("- Paper covers Rock and disproves Spock")
-        print("- Scissors cuts Paper and decapitates Lizard")
-        print("- Lizard eats Paper and poisons Spock")
-        print("- Spock smashes Scissors and vaporizes Rock\n")
+        print("- Rock🪨 crushes Scissors✂️ and crushes Lizard 🦎")
+        print("- Paper📄 covers Rock🪨 and disproves Spock👮")
+        print("- Scissors✂️ cuts Paper📄 and decapitates Lizard🦎")
+        print("- Lizard🦎 eats Paper📄 and poisons Spock🖖🏻")
+        print("- Spock👮 smashes Scissors✂️ and vaporizes Rock🪨\n")
+
 
     def start_game(self):
         player_name = input("Enter your name: ").strip().capitalize()
@@ -50,7 +51,6 @@ class Game:
             if player_choice in ["stop", "exit"]:
                 print(f"\n{player.name}, You chose to stop the game. Returning to the main menu...\n")
                 break
-
 
             computer_choice = computer.choose_option()
             self.determine_winner(player, computer, player_choice, computer_choice)
@@ -82,7 +82,7 @@ class Player:
     def choose_option(self):
         while True:
             print(f"\n{self.name}, ")
-            print("Choose one of: Rock, Paper, Scissors, Lizard, Spock")
+            print("Choose one of: Rock🪨, Paper📄, Scissors✂️, Lizard🦎, Spock👮")
             print("OR type 'Stop' or 'Exit' to end the game.")
             choice = input("Your choice: ").strip().capitalize()
 

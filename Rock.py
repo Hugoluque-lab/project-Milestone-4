@@ -12,14 +12,16 @@ class Game:
         }
 
     def show_intro(self):
-        print('\nWelcome to Rock, Paper, Scissors, Lizard, Spock!')
+        print('\nWelcome to Rock, Paper, Scissors, Lizard, Spock!\n ') 
         while True:
-            print("\nWhat would you like to do?")
+            print("----------------------------")
+            print("What would you like to do?")
             print("1: See the Rules")
             print("2: Start Game")
             print("3: Exit")
+            print("----------------------------")
 
-            choice = input("Enter 1, 2, or 3: ").strip()
+            choice = input("\nEnter 1, 2, or 3: ").strip()
             if choice == '1':
                 self.show_rules()
             elif choice == '2':
@@ -46,12 +48,9 @@ class Game:
         while True:
             player_choice = player.choose_option()
             if player_choice in ["stop", "exit"]:
-                print(f"\nYou chose to stop the game, {player.name}.")
-                if self.play_again():
-                    self.start_game()
-                else:
-                    print('Returning to the main menu...\n')
+                print(f"\n{player.name}, You chose to stop the game. Returning to the main menu...\n")
                 break
+
 
             computer_choice = computer.choose_option()
             self.determine_winner(player, computer, player_choice, computer_choice)
@@ -62,27 +61,18 @@ class Game:
         print(f"Computer chose {computer_choice}")
 
         if player_choice == computer_choice:
-            print("It's a tie!")
+            print("\n🤝 It's a tie! 🤝")
         elif computer_choice in self.rules.get(player_choice, []):
-            print(f"{player.name} wins this round!")
+            print(f"\n🎉 {player.name} wins this round! 🎉")
             player.update_score()
         else:
-            print("Computer wins this round!")
+            print("\n💻 Computer wins this round! 💻")
             computer.update_score()
 
     def display_result(self, player, computer):
-        print(f"{player.name}'s Score: {player.score} | Computer's Score: {computer.score}")
+        print(f"\nScoreboard:\n- {player.name}: {player.score}\n- Computer: {computer.score}\n")
 
-    def play_again(self):
-        while True:
-            again = input("Do you want to play again or exit to menu? (continue/exit): ").strip().lower()
-            if again in ["continue", "c"]:
-                return True
-            elif again in ["exit", "e"]:
-                return False
-            else:
-                print("Invalid input. Please type 'continue' or 'exit'.")
-
+ 
 
 class Player:
     def __init__(self, name: str):
@@ -91,21 +81,21 @@ class Player:
 
     def choose_option(self):
         while True:
-            choice = input(
-                f"{self.name}, choose [Rock, Paper, Scissors, Lizard, or Spock]\n"
-                "OR type 'Stop' or 'Exit' to end the game: "
-            ).strip().capitalize()
+            print(f"\n{self.name}, ")
+            print("Choose one of: Rock, Paper, Scissors, Lizard, Spock")
+            print("OR type 'Stop' or 'Exit' to end the game.")
+            choice = input("Your choice: ").strip().capitalize()
+
 
             if choice.lower() in ["stop", "exit"]:
                 return choice.lower()
             if choice in ["Rock", "Paper", "Scissors", "Lizard", "Spock"]:
                 return choice
             else:
-                print("Invalid choice. Please try again.")
+                print("\n Invalid choice. Please try again.")
 
     def update_score(self):
         self.score += 1
-
 
 class Computer:
     def __init__(self):
@@ -116,7 +106,6 @@ class Computer:
 
     def update_score(self):
         self.score += 1
-
 
 if __name__ == "__main__":
     game = Game()
